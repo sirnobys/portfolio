@@ -1,18 +1,17 @@
-import React from 'react'
-import './Footer.css'
+import React from "react";
+import "./Footer.css";
+import { Fade } from "react-reveal";
+import { greeting } from "../../portfolio.js";
+/* eslint-disable jsx-a11y/accessible-emoji */
 
-const Footer = () => {
+export default function Footer(props) {
   return (
-    <footer>
-      <p className="copyright">
-        Made with{' '}
-        <span role="img" aria-label="thinking">
-          ❤️
-        </span>{' '}
-        by Matthew Jigalin
-      </p>
-    </footer>
-  )
+    <div className="footer-div">
+      <Fade>
+        <p className="footer-text" style={{ color: props.theme.secondaryText }}>
+          Made with <span role="img">❤️</span> by {greeting.title2}
+        </p>
+      </Fade>
+    </div>
+  );
 }
-
-export default Footer

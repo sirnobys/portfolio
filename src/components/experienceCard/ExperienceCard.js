@@ -1,72 +1,67 @@
-import React from 'react'
-import './ExperienceCard.css'
+import React from "react";
+import "./ExperienceCard.css";
 
-const ExperienceCard = ({ experience }) => {
-  let { link, company, title, dateFrom, dateTo, info, stack } = experience
+function ExperienceCard(props) {
+  const experience = props.experience;
+  const theme = props.theme;
   return (
-    <a
-      className="experience-link"
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
+      className="experience-card"
+      style={{
+        border: `1px solid ${experience["color"]}`,
+        backgroundColor: theme.imageDark,
+      }}
     >
-      <div className="experience-card-wrapper">
-        <div className="experience-card">
-          <div className="experience-card-top">
-            <div
-              className="experience-bg"
-              style={{ background: experience.colourPrimary }}
-            ></div>
-            <h2>{company}</h2>
-            <div className="image-wrapper">
-              <div
-                className="experience-bg logo-bg"
-                style={{
-                  background: experience.colourSecondary
-                    ? experience.colourSecondary
-                    : experience.colourPrimary,
-                }}
-              ></div>
-              <img
-                className="company-logo"
-                src={require(`../../images/logos/${company
-                  .replace(/ /g, '')
-                  .toLowerCase()}.png`)}
-                alt={`${company}-logo`}
-                style={
-                  experience.logoheight
-                    ? {
-                        height: `${experience.logoheight}%`,
-                      }
-                    : { width: `${experience.logowidth}%` }
-                }
-              />
-            </div>
+      <div className="experience-card-logo-div">
+        <img
+          className="experience-card-logo"
+          src={require(`../../assests/images/${experience["logo_path"]}`)}
+          alt=""
+        />
+      </div>
+      <div className="experience-card-body-div">
+        <div className="experience-card-header-div">
+          <div className="experience-card-heading-left">
+            <h3 className="experience-card-title" style={{ color: theme.text }}>
+              {experience["title"]}
+            </h3>
+            <p
+              className="experience-card-company"
+              style={{ color: theme.secondaryText }}
+            >
+              <a
+                href={experience["company_url"]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {experience["company"]}
+              </a>
+            </p>
           </div>
-          <div className="experience-card-bottom">
-            <div>
-              <h2>{title}</h2>
-              <h3>
-                {dateFrom} - {dateTo}
-              </h3>
-              <ul>
-                {info.map((point, idx) => (
-                  <li key={`${company}-point-${idx}`}>{point}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="experience-card-tech">
-              <ul>
-                {stack.map((tech) => (
-                  <li key={`${company}-${tech}`}>{tech}</li>
-                ))}
-              </ul>
-            </div>
+          <div className="experience-card-heading-right">
+            <p
+              className="experience-card-duration"
+              style={{ color: theme.secondaryText }}
+            >
+              {experience["duration"]}
+            </p>
+            <p
+              className="experience-card-location"
+              style={{ color: theme.secondaryText }}
+            >
+              {experience["location"]}
+            </p>
           </div>
         </div>
+        <p
+          className="experience-card-description"
+          style={{ color: theme.text }}
+        >
+          {experience["description"]}
+        </p>
       </div>
-    </a>
-  )
+    </div>
+  );
 }
 
-export default ExperienceCard
+export default ExperienceCard;
